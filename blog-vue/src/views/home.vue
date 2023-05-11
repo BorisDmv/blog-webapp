@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <textarea v-model="markdown"></textarea>
         <div v-html="markdownToHtml"></div>
         
@@ -39,3 +39,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container{
+    margin: 0 auto;
+    margin-top: 136px;
+}
+
+</style>

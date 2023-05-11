@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1>{{ blog.title }}</h1>
         <div v-html="markdownToHtml"></div>
     </div>
@@ -38,3 +38,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.container{
+    margin: 0 auto;
+    margin-top: 300px;
+    padding: 2rem;
+}
+
+</style>
