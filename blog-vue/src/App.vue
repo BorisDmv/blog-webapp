@@ -1,22 +1,18 @@
 <template>
-  <div>
-    <navigation/>
-    <router-view/>
+    <div>
+        <navigation/>
+        <router-view/>
 
-  </div>
+    </div>
 </template>
 
 <script>
 import navigation from "./components/navigation.vue"
 
 export default {
- components: {
-    navigation
- }
+    components: {
+        navigation
+    }
 }
 
 </script>
-
-<style>
-
-</style>

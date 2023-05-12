@@ -4,7 +4,7 @@
         <!--        <div v-html="markdownToHtml"></div>-->
 
 
-        <div v-for="blog in blogs">
+        <div v-for="blog in blogs" :key="blog.id">
             <!--            <div>-->
             <!--                <p>Title is {{ blog.attributes.title }}</p>-->
             <!--                <p>Title is {{ blog.attributes.desc }}</p>-->
@@ -21,7 +21,7 @@
                         <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg"
                              alt="simple white desk on a white wall with a plant on the far right side"
                              class="article-image">
-                        <p class="article-info">July 23, 2019 | 3 comments</p>
+                        <p class="article-info">{{ blogFormattedDate(blog) }}</p>
                         <p class="article-body">{{ blog.attributes.desc }}</p>
                         <a @click="ReadBlog(blog.id)" class="article-read-more">CONTINUE READING</a>
                     </article>
@@ -41,7 +41,14 @@ export default {
     data() {
         return {
             markdown: "# Hello World",
-            blogs: []
+            blogs: [
+                {
+                    id: 1,
+                    attributes: {
+                        createDate: null
+                    }
+                }
+            ]
         };
     },
     methods: {
@@ -50,6 +57,17 @@ export default {
         }
     },
     computed: {
+        blogFormattedDate() {
+            return function (blog) {
+                console.log(blog)
+                const dateString = blog.attributes.createdAt;
+                if (dateString) {
+                    const dateParts = dateString.split("T");
+                    return dateParts[0];
+                }
+                return ""; // Or you can return a default value if createDate is null
+            };
+        },
         markdownToHtml() {
             return marked(this.markdown);
         }
