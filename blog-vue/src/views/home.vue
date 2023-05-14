@@ -5,12 +5,6 @@
 
 
         <div v-for="blog in blogs" :key="blog.id">
-            <!--            <div>-->
-            <!--                <p>Title is {{ blog.attributes.title }}</p>-->
-            <!--                <p>Title is {{ blog.attributes.desc }}</p>-->
-            <!--                <button @click="ReadBlog(blog.id)">Read more</button>-->
-            <!--            </div>-->
-
 
             <!-- container starts -->
             <div class="container container-flex">
@@ -23,7 +17,7 @@
                              class="article-image">
                         <p class="article-info">{{ blogFormattedDate(blog) }}</p>
                         <p class="article-body">{{ blog.attributes.desc }}</p>
-                        <a @click="ReadBlog(blog.id)" class="article-read-more">CONTINUE READING</a>
+                        <a @click="ReadBlog(blog.attributes.slug)" class="article-read-more">CONTINUE READING</a>
                     </article>
 
 
@@ -52,8 +46,8 @@ export default {
         };
     },
     methods: {
-        ReadBlog(blogID) {
-            this.$router.push(`/blog/${blogID}`)
+        ReadBlog(blogSlug) {
+            this.$router.push(`/blog/${blogSlug}`)
         }
     },
     computed: {
