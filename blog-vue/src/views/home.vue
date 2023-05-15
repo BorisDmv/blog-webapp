@@ -7,12 +7,12 @@
         <div v-for="blog in blogs" :key="blog.id">
 
             <!-- container starts -->
-            <div class="container container-flex">
-                <main role="main">
+            <div class="blogCont container-flex">
+                <main>
 
                     <article class="article-featured">
                         <h2 class="article-title">{{ blog.attributes.title }}</h2>
-                        <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg"
+                        <img :src="blog.attributes.thumbnail"
                              alt="simple white desk on a white wall with a plant on the far right side"
                              class="article-image">
                         <p class="article-info">{{ blogFormattedDate(blog) }}</p>
@@ -84,6 +84,10 @@ export default {
     margin: 200px auto;
 }
 
+main{
+    width: 100%;
+}
+
 .container-flex {
     max-width: 70vw;
     margin: 0 auto;
@@ -104,12 +108,13 @@ export default {
 }
 
 .article-image {
-    width: 70%;
+    width: 50%;
 }
 
 .article-read-more,
 .article-info {
     font-size: .875rem;
+    margin: 1rem 0 0 0;
 }
 
 .article-read-more {
@@ -125,13 +130,13 @@ export default {
     text-decoration: underline;
 }
 
-.article-info {
-    margin: 2em 0;
-}
-
 @media (max-width: 1000px) {
     .container {
-        margin-top: 320px;
+        margin-top: 380px;
+    }
+
+    .article-image{
+        width: 100%;
     }
 }
 

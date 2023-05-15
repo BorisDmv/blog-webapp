@@ -24,6 +24,9 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "thumbnail": {
+      "type": "text"
     }
   }
 }
