@@ -11,13 +11,13 @@
                 <main>
 
                     <article class="article-featured">
-                        <h2 class="article-title">{{ blog.attributes.title }}</h2>
-                        <img :src="blog.attributes.thumbnail"
+                        <h2 class="article-title">{{ blog.title }}</h2>
+                        <img :src="'http://localhost:3000/' + blog.thumbnail"
                              alt="simple white desk on a white wall with a plant on the far right side"
                              class="article-image">
-                        <p class="article-info">{{ blogFormattedDate(blog) }}</p>
-                        <p class="article-body">{{ blog.attributes.desc }}</p>
-                        <a @click="ReadBlog(blog.attributes.slug)" class="article-read-more">CONTINUE READING</a>
+                        <p class="article-info">{{ blog.created_at }}</p>
+                        <p class="article-body">{{ blog.description }}</p>
+                        <a @click="ReadBlog(blog.slug)" class="article-read-more">CONTINUE READING</a>
                     </article>
 
 
@@ -35,14 +35,7 @@ export default {
     data() {
         return {
             markdown: "# Hello World",
-            blogs: [
-                {
-                    id: 1,
-                    attributes: {
-                        createDate: null
-                    }
-                }
-            ]
+            blogs: {}
         };
     },
     methods: {
@@ -51,26 +44,20 @@ export default {
         }
     },
     computed: {
-        blogFormattedDate() {
-            return function (blog) {
-                console.log(blog)
-                const dateString = blog.attributes.createdAt;
-                if (dateString) {
-                    const dateParts = dateString.split("T");
-                    return dateParts[0];
-                }
-                return ""; // Or you can return a default value if createDate is null
-            };
-        },
-        markdownToHtml() {
-            return marked(this.markdown);
-        }
+      formattedCreatedAt() {
+        const createdAt = new Date(this.blogs.created_at);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return createdAt.toLocaleDateString('en-US', options);
+      },
+      markdownToHtml() {
+          return marked(this.markdown);
+      }
     },
     created() {
         this.$axios.get('blogs')
             .then(response => {
-                console.log(response.data.data);
-                this.blogs = response.data.data
+                console.log(response);
+                this.blogs = response.data
             })
             .catch(error => {
                 console.error(error);
