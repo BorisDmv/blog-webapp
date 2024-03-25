@@ -28,9 +28,8 @@ export default {
   async created(){
       await this.$axios.get(`blogs/${this.$route.params.id}`)
       .then(response => {
-          console.log(response.data.data.attributes);
-          this.blog.title = response.data.data.attributes.title
-          this.blog.desc = response.data.data.attributes.desc
+          this.blog.title = response.data.title
+          this.blog.desc = response.data.desc
       })
       .catch(error => {
           console.error(error);
@@ -43,8 +42,14 @@ export default {
 
 .container{
     margin: 0 auto;
-    margin-top: 300px;
+    margin-top: 100px;
     padding: 2rem;
+}
+
+@media (max-width: 1000px) {
+    .container {
+      margin-top: 300px;
+    }
 }
 
 </style>
